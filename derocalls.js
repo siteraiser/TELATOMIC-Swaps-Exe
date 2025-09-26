@@ -303,27 +303,77 @@ async function addSCIDToList(asset,htl_scid,offer){
 	JSONR.params.scid = bids_sc_id;
 	JSONR.params.ringsize = 2;
 
-	response = await socketSend(JSONR);
-	
+	let response = await socketSend(JSONR);
+
 	if(response.result){
 		let confirmed = await confirmation(response.result.txid);
+		let success_msg = "You've posted the "+asset+" smart contract now it needs to be funded to complete this step.";
+		let problem_msg = "Failed to post contract id to the index, try again? If not, then you'll need to install another contract.";
 		if(confirmed){
-			await alertModal("You've posted the "+asset+" smart contract now it needs to be funded to complete this step.");
+			await alertModal(success_msg);
 		}else{
-			let result = await confirmModal("Failed to post contract id to the index, try again? If not, then you'll need to install another contract.");
+			let result = await confirmModal(problem_msg);
 			if(result){
-				await addSCIDToList(asset,htl_scid,offer);
+				darken_layer.classList.remove("hidden");
+				let exists = await contractIdExists(asset,htl_scid,offer.id)
+				darken_layer.classList.add("hidden");
+				if(!exists){
+					darken_layer.classList.remove("hidden");
+					await addSCIDToList(asset,htl_scid,offer);
+				}else{
+					await alertModal(success_msg);
+				}
 			}else{
 				button_states=[]
 			}
 		}
 	}else if(response.error){
-		await alertModal(response.error.message);
-		button_states=[]
+		let result = await confirmModal(response.error.message + "<br>" + problem_msg);
+		if(result){
+			darken_layer.classList.remove("hidden");
+			await addSCIDToList(asset,htl_scid,offer);
+		}else{
+			button_states=[]
+		}		
 	}
 }
 
+async function contractIdExists(asset,htl_scid,offer_id){
+	let scidfield = "";
+	if(asset == "PLS"){
+		scidfield = "pscid"+offer_id
+	}else{
+		scidfield = "dscid"+offer_id
+	}
+	let JSONR = {};
 
+	JSONR.method = "DERO.GetSC";
+	JSONR.params = {};
+	JSONR.params.scid = "";
+	JSONR.params.code = false;
+	JSONR.params.keysstring = [scidfield];
+	JSONR.params.scid = dero_htl_scid;
+	let response = await socketSend(JSONR);
+	
+	if(response.result){
+		let scid = response.result.valuesstring[0];	
+		if(!scid.includes("NOT AVAILABLE")){
+			if(htl_scid == hexToUtf8(scid)){
+				return true;
+			}
+			return false;
+		}
+	}else if(response.error){
+		let result = await confirmModal(response.error.message + " Try again?");
+		if(result){
+			darken_layer.classList.remove("hidden");
+			await contractIdExists(asset,htl_scid,offer_id);
+		}else{
+			return false;
+		}
+		
+	}
+}
 //---------
 //get gas fees quote for htl sc installation 
 

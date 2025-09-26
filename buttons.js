@@ -244,7 +244,9 @@ async function getMakerPDInstallButton(action_button,offer,deadline,hashvalue){
 				return;
 			}
 			await alertModal("Next step, approve SC listing TX in Dero wallet.");
+			darken_layer.classList.remove("hidden");
 			await addSCIDToList("PLS",pls_htl_scid_tx,offer);
+			darken_layer.classList.add("hidden");
 			action_button.disabled = true;
 			action_button.textContent = "Waiting for update";
 			button_states[offer.id] = action_button.textContent;
@@ -275,7 +277,9 @@ async function getMakerDPInstallButton(action_button,offer,deadline,hashvalue){
 				return;
 			}
 			await alertModal("Next step, approve SC listing TX in Dero wallet.");
+			darken_layer.classList.remove("hidden");
 			await addSCIDToList("DERO",dero_htl_scid,offer);
+			darken_layer.classList.add("hidden");
 			action_button.disabled = true;
 			action_button.textContent = "Waiting for update";
 			button_states[offer.id] = action_button.textContent;
