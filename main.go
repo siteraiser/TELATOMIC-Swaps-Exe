@@ -34,7 +34,6 @@ func main() {
 
 	portFlag := flag.Int("port", 8080, "string")
 	flag.Parse()
-	fmt.Println(*portFlag)
 	port := strconv.Itoa(*portFlag)
 	go func() {
 		time.Sleep(200 * time.Millisecond)
