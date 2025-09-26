@@ -1,0 +1,197 @@
+body {
+font-family: Arial, sans-serif;
+padding: 0;
+margin: 0;
+background: #abf7dd;
+background: linear-gradient(0deg, rgba(171, 247, 221, 1) 0%, rgb(183, 214, 207) 50%, rgba(155, 218, 250, 1) 100%);
+}
+h1{font-family:Georgia,serif;margin:0px auto}
+#wg{
+text-align:center;
+margin-bottom:0px;
+font-size:0.8em;
+font-style:italic
+}
+header{
+display: flex;
+flex-direction: column;
+align-items: center;
+clear:both;
+}
+main,footer{max-width:1400px;margin:auto}
+footer{
+margin:20px auto;
+border:1px solid black;
+box-shadow:0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+border-radius:5px;
+background:#d3ebed;
+}
+footer>div{padding: 15px;}
+#wallets{  
+max-width:fit-content;
+text-align:center;
+margin:auto;
+}
+#wallets > div{
+margin: auto;
+text-align: left;
+position: relative;
+}
+.connect,.mm-connect{
+overflow-x: hidden;
+text-overflow: ellipsis;
+text-wrap-mode: nowrap;
+font-size: .8em;
+margin: 3px 0;
+}
+
+.c_buttons_div{
+margin-left: 50px;
+top: -50px;
+position: relative;
+}
+.showChainId{color:#999;}
+#c_status{color:#ddd;display:inline-block;font-size:2.4em;margin:0px 4px}
+#c_status.ok{color:#0d0;}
+.align-center{text-align:center}
+
+#bids{   
+display: flex;
+flex-direction: row;
+align-content: center;
+align-items: stretch;
+justify-content: space-around;
+flex-wrap: wrap;
+}
+#bids>div{
+flex: 1;
+padding:10px;
+border:1px solid black;
+box-shadow:0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+border-radius:5px 5px 0px 0px;
+background: #d3ebed;
+}
+#refresh_bids{min-width:110px;text-align:center}
+.bid_inputs span{font-weight:bold}
+
+.bid_filter_buttons{display:flex;}
+.bid_buttons > button,.bid_filter_buttons > button,.bid_inputs > div{margin:5px 2px}
+.bid_filter_buttons > button.selected{
+border-radius:3px;
+background-color:#000;
+color:white;
+box-shadow:0px 2px 2px rgba(0, 0, 0, 0.6);
+}
+.inner_sorting{	
+display: flex;
+justify-content: flex-start;
+}
+.inner_sorting>div{padding:2px 5px;}
+
+.description {
+position:relative;
+} 
+
+.description-content {
+margin-left:20px;
+padding:2px;
+} 
+
+#bids input[type=checkbox] {
+position: absolute;
+margin-top: 5px;
+z-index: 50;
+}
+
+input[type=checkbox]:checked {
+background: #deebff;
+}  
+input[type=checkbox]:checked + div {
+background: #deebff;
+outline: 1px solid blue;
+}    
+#refresh_bids{margin:3px 0}
+
+#bid_list{overflow-x:auto;background: #fff;box-shadow:0px 1px 1px rgba(0, 0, 0, 0.6)}
+#bid_list>div{
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+grid-auto-rows: 100px;
+gap:2px	
+}
+
+
+#bid_list>div>* {min-width:80px;}
+#bid_list>div>div{border: 1px solid #fff;background-color: #eee; }
+#bid_list>div :nth-child(1){ grid-column: 1} 
+#bid_list>div :nth-child(2){ grid-column: 2} 
+#bid_list>div :nth-child(3){ grid-column: 3} 
+#bid_list>div :nth-child(4){ grid-column: 4} 
+#bid_list>div :nth-child(5){ grid-column: 5} 
+#bid_list>div :nth-child(6){ grid-column: 6} 
+#bid_list>div :nth-child(7){ grid-column: 7} 
+#bid_list>div :nth-child(8){ grid-column: 8} 
+#bid_list>div :nth-child(3), #bid_list>div :nth-child(4), #bid_list>div :nth-child(5), #bid_list>div :nth-child(6), #bid_list>div :nth-child(7), #bid_list>div :nth-child(8){word-wrap:break-word;word-break:break-all;overflow-y:auto}
+#bid_list :first-child :nth-child(3),#bid_list :first-child :nth-child(4),#bid_list :first-child :nth-child(5),#bid_list :first-child :nth-child(6){ word-wrap:normal;word-break:normal;overflow-y:initial;grid-row: 1 / 16;} 
+#bid_list div:nth-child(1),#bid_list div:nth-child(1) div {height:55px;margin-bottom: 2px}
+
+.modal {
+background-color:#eee;
+box-shadow: 4px 1px 11px 5px #072904;
+box-sizing: border-box;
+max-width: 500px;
+max-height: 100%;
+top: 0;
+left: 0;
+right: 0;
+margin-left: auto; 
+margin-right: auto; 
+z-index:100;
+padding: 20px;
+position: fixed;
+overflow: auto;	
+}
+
+	
+.modal label,div.uuid{
+display:block;
+margin: 5px;
+}
+.modal label.hidden{
+display:none;
+}
+.modal .close,.modal .clear{
+float:right;
+padding:10px;
+border:1px solid grey;
+cursor: pointer;	
+}
+.darken{
+top: 0; bottom: 0; left: 0; right: 0;
+position:fixed;
+background: rgba(0,0,0,.4);
+z-index:75;
+backdrop-filter: sepia(50%);
+}
+
+.hidden{display:none;}
+
+.modal, #main > div, #messages,#main > div, #transactions{
+overflow-wrap: break-word;
+line-height: 1.7em
+}
+.modal input,.modal textarea,.modal select{
+padding:5px
+}
+select option{
+padding:5px
+}	
+.modal fieldset{
+margin:0 -5px
+}
+.modal input{
+display:block
+}
+
+#index_address,.messages{word-wrap:break-word;word-break:break-all}
+.messages{max-height:50px;overflow-y:auto}

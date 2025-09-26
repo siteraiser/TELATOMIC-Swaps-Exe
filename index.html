@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<title>TELATOMIC SWAPS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" integrity="sha384-Ptk2PWqkZWMoP7ivsQOoijqfM5hQC4AgIEmQ+WUgk2OY5eNAmVLXunFrfpnZhmkb" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="messages"></div>
+<div id="wallets">
+<div>
+<div id="c_status">
+&check;
+</div>
+<div class="c_buttons_div">
+<div class="connect">
+<button class="connect-button" id="connectButton">Connect Dero</button>&nbsp;<span id="wallet_address"></span>
+</div>
+<div class="mm-connect">
+<button class="enableEthereumButton">Connect MetaMask</button>&nbsp;<span class="showAccount"></span> 
+<div class="showChainId"></div>
+</div>
+</div> 	 
+</div> 	
+</div>
+<header>
+<div>
+<h1 class="align-center" style="text-shadow:0px -3px 3px #00ff4f">TELATOMIC SWAPS</h1>
+<div id="wg">by <a href="tela://open/f32e74164be49cf1d0af1daca897a9d79f0de1b4c48c68b9d462c9724ab138fb">WebGuy</a></div>
+<p class="align-center">Trustless swaps between <a href="https://dero.io/">Dero</a> and <a href="https://pulsechain.com/">PulseChain</a>. 
+</div>
+</header>
+<main>
+<div id="bids">	
+<div>
+<h2>Make an Offer</h2>
+<div id="create_offer">
+<div>I want
+<div class="bid_inputs" style="display:flex;flex-direction:column;">
+<div id="dero_input" style="order:1">
+<input type="text" id="dero_bid_amt" value="">
+<span>DERO</span>
+</div>
+<div style="order:2">
+&nbsp;for&nbsp;
+</div>
+<div id="pls_input" style="order:3">
+<input type="text" id="pls_bid_amt" value="">
+<span>PLS</span> 
+</div>
+</div>
+</div>
+<div class="bid_buttons">
+<button id="bid_switch" class="bids">Switch Swap Direction</button>
+<button id="create_bid" class="bids">Create a bid</button>
+<br>
+</div>	
+</div>
+</div>
+<div>
+<h2>View Offers</h2>	
+<div class="filtering">
+<div class="bid_filter_buttons">
+<button id="all_offers" class="selected">Offers</button> <button id="my_offers">My Offers</button> <button id="my_taken">Offers I Took</button> <button id="my_active">Active Offers</button>
+</div>	
+<div class="sorting">
+<div class="inner_sorting">
+<div>
+Show:  
+<div>
+<input type="checkbox" id="p_d" checked="checked"><div class="description"><div class="description-content">PLS for Dero</div></div>
+<input type="checkbox" id="d_p" checked="checked"><div class="description"><div class="description-content">Dero for PLS</div></div>
+</div>
+</div>
+<div>
+Sort by: 
+<div>
+<input type="checkbox" id="latest_first" checked="checked"><div class="description"><div class="description-content">Latest First</div></div>
+<input type="checkbox" id="best_first" ><div class="description"><div class="description-content">Best First</div></div>
+<input type="checkbox" id="largest_first" ><div class="description"><div class="description-content">Largest First</div></div>	
+</div>
+</div>
+</div>
+<br>
+<button id="refresh_bids" class="bids">Refresh Bid List</button>
+<br>
+</div>
+</div>
+</div>		
+</div>
+<div style="margin:2px;color:grey;text-align:right">
+<label style="margin-right:8px"><input type="checkbox" id="refresh_checkbox" checked="checked"><span id="refresh_text">Using New Heights</span></label> Block&nbsp;Height:&nbsp;<span id="latest_block" style="margin-right:8px">0</span>
+</div>
+<div id="bid_list"></div>
+</main>
+<footer>
+<div>
+<h3>Info</h3>
+<p>TELATOMIC Swaps should work for as long as the last Web3.js release works with MetaMask or until the Web3 script url stops responding or the smart contract gets too full and the UI becomes too slow. Please ensure everything is correctly working before using large amounts. There are no off-the-top fees, only network and smart contract fees. Any actions like creating, removing, accepting bids, installing, posting to the index and funding hashed time lock contracts as well as withdrawals and refunds all require a network fee. Make sure you have enough of both cryptos to complete all of the steps ahead of time and plan for fee volatility on PulseChain. This is especially important for offer makers since they are the ones assuming some risk if they do not complete the process before the deadline. TELATOMIC Swaps are not private and you should consider running your own node for the best experience. For offer takers, if you stay on the app, it will remember your keys that you have created, if you leave, then you will need the downloaded swap receipt. You can find the contracts <a href="https://github.com/siteraiser/TELATOMIC-Swaps/tree/main" target="_blank">here</a>.</p>
+<h4>Troubleshooting / Important Notes</h4>
+<p>You should always download the offered downloads in case in anything goes wrong. If something isn't working as expected, make sure to check your MetaMask connection and also to check your Dero wallet for pending approvals. You can wait a bit and hit the refresh button to immediately check or switch the refresh mode between the default new topoheight events and the timer based checking loop if the updates are not consistently autmatically updating the offers and the block height indicator. The app should not allow any catastrophies to occur but if you install a contract and leave the app before posting the scid to the index then you will have to install another and continue from there. All of the contracts are checked before funding them so if something were to go wrong, you should have no problems waiting until the refund is ready and withdrawing then.</p>
+<p>The sorting algorithm for latest offers and your offers / taken offers may differ slightly depending on the status of the contract. Things may not update immediately (you can always hit the refresh button), so you should remain cognisant of your progress through the steps so that you don't perform the same action twice by mistake and waste some fees etc. If the screen is stuck in a darkened state then the wallet is most likely waiting for an approval for a transaction or some other permission.</p>
+<p>Dero settlements are considered final after the block has completed, you may however want to check high value PulseChain / EVM transaction progress with an explorer and wait for confirmations etc.</p>
+<p>The SCID for the index is:<span id="index_address"></span></p>
+<h4>Offer Maker Guide</h4>
+<p>First, post an offer and then wait for someone to accept the offer and they will need to install and fund a hashed time lock contract for you to unlock later when you receive the key. Their lockup period is 48hrs. After you see that they have installed and funded a contract for you then if you decide to proceed, you will need to install and fund a 24 hour HTL contract using the hash they provided when installing their contract. It is best to respond as quickly as possible since you'll have 12 to 24 hours max before risking losing your funds after you install the stage 2 contract if they try to accept it at the last minute. This would leave you less time to unlock your funds, and if you don't by the time their 48 hour lock time is up, they can refund that in addition and get what was supposed to be yours. The app won't allow you to have less than 12 hours after installing and funding your contract to respond, if you respond quickly you'll have 24 hours max.</p>
+<p>After installing the contract, wait for them to withdraw their funds which provides you with a key to unlock your funds. Make sure to check "My Offers" or "Active Offers" to see the latest updates on the offers you created. For extra precaution you should download your contract ids when it is offered in case you have a problem and need to withdraw manually using the emergency withdrawal function. You should also save a copy of the Tela address so that you can input that manually into the wallet to load TELATOMIC Swaps if needed.</p>
+<h4>Offer Taker Guide</h4>
+<p>Accept an offer and install a 48 hour Hashed Time Lock contract then post it to the index, then create a key for the hash and fund the contract using the hash to keep it locked up until the other party unlocks it with your key or the 48 hours are up. After the other party sees that you have locked up the amount for the swap they will use the hash you provided and lock up the funds for you to unlock using your key. And you're done after unolocking your funds with the key you created. You should always download the swap receipt containing the key when prompted if you plan on leaving the app, otherwise you will have to wait 48hrs for your refund.</p>
+<h3>Banning Users / Donations</h3>
+<p>You can ban bad actors that are unresponsive, acting in poor faith / spamming pointless offers or otherwise. If you choose to ban an address, you pay an amount which the banned user will also have to pay to restore their listing privilidges. All of the proceeds go to the developer as a donation and will not be refunded per request. It is recommended to use a small amount since they can create another wallet instead of paying the fee.</p>
+<p>Banned users will still be able to complete any swaps they are involved but their open offers will not appear and they can't add new listings or accept new offers. The ban will only succeed if both users have used the app recently.</p>
+<button id="ban_user">Ban an Address</button> <button id="unban_user">Unban Address</button>
+<h3>Emergency Withdrawal</h3>
+<p>This feature is for offer makers to use if they have any trouble during the second stage. You'll need to withdraw your funds before the other party can try to refund it. So, in case of emergency, you can try to manually withdraw using the 2 smart contract ids that you should download when funding your HTL contract. You should also save a copy of the smart contract id / Tela address for TELATOMIC Swaps (in case of wallet / pruned node data loss).</p>
+<button id="e_withdrawal">Try Manual Withdrawal</button>
+<h4>Terms and Conditions</h4>
+<p>By using this site you agree to the terms and conditions set forth by the benevolent overlord of the realm. You are responsible for knowing what you are interacting with and cannot hold decentralized / immutable code on the blockchain responsible for any losses.</p>
+<p>GNU General Public License (GPL) is implied for TELATOMIC Swaps code.</p>
+<h3>Shoutouts:</h3>
+<p><a href="tela://open/a79a7346910d4a04307bc649ea64e160f68d89e6af262a37e278d2d0867a8681">Arcaneshpere</a><hr>
+</p>
+<p><a href="https://linktr.ee/chakipu">Chakipu</a><hr>
+</p>
+<p>mmarcel<hr>
+</p>
+<p><a href="https://github.com/secretnamebasis">SecretNameBasis</a><hr>
+</p>
+Donos -> "WebGuy" on Dero, thanks!
+</div>
+</footer>
+<div class= "darken hidden"></div>
+<div id="modal" class="modal hidden"></div>
+<script>
+one_day_in_secs=86400
+one_and_a_half_days_in_secs=129600
+two_days_in_secs=172800
+const bids_sc_id="a9e2bc409b1bf5b9da85ad423eac312dc1d5551f0f178334089f10b89a8c24d3"
+document.getElementById('index_address').innerText=bids_sc_id
+const rando_dest="dero1qykyta6ntpd27nl0yq4xtzaf4ls6p5e9pqu0k2x4x3pqq5xavjsdxqgny8270"
+let app_name="TELATOMIC Swaps for Dero and PLS Web3"
+let app_id=""
+applicationData={}
+async function setAppSettings(){
+	app_id = await generateSHA256Hash(app_name)
+	applicationData={
+		"id":app_id,
+		"name":app_name,
+		"description":"Atomic swaps between Dero and PulseChain Web3",
+		"url":window.location.protocol+'//'+window.location.host
+	}
+}
+setAppSettings()
+async function generateSHA256Hash(data){
+    const encoder=new TextEncoder()
+    const dataBuffer=encoder.encode(data)
+    const hashBuffer=await crypto.subtle.digest('SHA-256',dataBuffer)
+    const hashArray=Array.from(new Uint8Array(hashBuffer))
+    const hashHex=hashArray.map(byte=>byte.toString(16).padStart(2,'0')).join('')
+	return hashHex;
+}
+let socket
+let connected_dero_account=''
+function sendData(d){
+    if (socket&&socket.readyState===WebSocket.OPEN) {
+        try {
+            socket.send(JSON.stringify(d))
+            if (d.method){
+                console.log(d.method,"request sent")
+            }else{
+                console.log("Connection request sent")
+            }
+        } catch (error) {
+            console.error("Failed to send:",error)
+        }
+    } else {
+        console.log("Socket is not open. State:",socket ? socket.readyState : "N/A")
+    }
+}
+
+function connectWebSocket(){
+    if (document.getElementById("connectButton").textContent==="Disconnect"){
+		 if (socket)socket.close(),socket=null
+        return
+    }
+    socket = new WebSocket("ws://localhost:44326/xswd")
+    socket.addEventListener("open",function(event){
+        console.log("Web socket connection established:",event)
+        sendData(applicationData)
+    })
+    let connecting=true
+    let initializing=true
+    socket.addEventListener("message",function(event){
+        const response=JSON.parse(event.data)
+        if (response.accepted){
+            console.log("Connected message received:",response.message)       
+			sendData({"jsonrpc": "2.0","id":"0","method":"GetAddress"})
+        } else if (response.result){
+            const res = response.result
+            if (res.address&&connecting){ 
+                toggleButton("green")
+                connecting=false
+				if(connected_dero_account != res.address){
+					completed_offers=[]
+					web3contracts=[]
+				}
+				connected_dero_account=res.address
+				wallet_address.innerHTML=res.address
+				refreshBids()
+				subscribe()
+				socket.addEventListener("message",listener)
+			}else if(typeof res.address==='undefined'&&connecting){ 
+				alertModal("Wallet is not connected.")
+            }			
+        } else if(response.error&&connecting){
+            console.error("Error:",response.error.message)
+            alertModal(response.error.message)
+            toggleButton("red")
+        }
+    })
+    socket.addEventListener("error",function(event){
+        console.error("Web socket error:",event)   
+    })
+    socket.addEventListener("close",function (event){
+        console.log("Web socket connection closed:",event.code,event.reason);
+		toggleButton('red')
+    })	
+}
+window.connectWebSocket=connectWebSocket
+function toggleButton(color){
+	let button_text="Disconnect"
+	if (color=="red"){
+		button_text="Connect Dero"		
+	}
+	document.getElementById("connectButton").innerText=button_text
+	document.getElementById("connectButton").style.color=color
+	CStatusChange()
+}
+
+document.getElementById("connectButton").addEventListener("click",connectWebSocket)
+let c_status = document.getElementById("c_status")
+function CStatusChange(){
+	let derook=false
+	let evmok=false
+	if(use_chain_id==chain_selected&&connected_evm_account!=""){
+		evmok = true
+	}
+	if(document.getElementById("connectButton").innerText=="Disconnect"){
+		derook=true
+	}
+	if(derook&&evmok){
+		c_status.classList.add('ok')
+	}else{
+		c_status.classList.remove('ok')
+	}
+	showStatus()
+}
+let call_id=1
+let globalResolutions=[]
+let callStack=[]
+let subbed=false
+async function listener(event){  
+	let JSONresult = JSON.parse(event.data)	
+	if(JSONresult.id==0&&JSONresult.result.event=="new_topoheight"){
+		latest_block.innerHTML=JSONresult.result.value
+		await refreshBids("topoheight")
+		return
+	}	
+	let currentResolver = globalResolutions[JSONresult.id][0]
+	callStack[JSONresult.id]=JSONresult
+	let highest_sent=Math.max(...[...globalResolutions.keys()])
+	if(highest_sent==JSONresult.id){			
+		delete globalResolutions[JSONresult.id]
+		delete callStack[JSONresult.id]
+		currentResolver(JSONresult)		
+	}else{
+		for(i in callStack){
+			let currentResolver=globalResolutions[i][0]	
+			let call=callStack[i]		
+			delete globalResolutions[i]	
+			delete callStack[i]
+			currentResolver(call)	
+		}	
+	}
+}
+async function socketSend(data){
+	return new Promise(function(resolve){
+		data.jsonrpc="2.0"
+		data.id=call_id++
+		globalResolutions[data.id]=[resolve,0];	
+		sendData(data)
+	})   
+}
+document.body.addEventListener("click",function(e){
+	if(e.target&&e.target.closest('a')){		
+        let url = e.target.closest('a').getAttribute('href')
+		if(!e.target.closest('a').getAttribute('download')){
+			e.preventDefault()
+		}else{
+			return
+		}
+		let hname = getHost(url)
+		if(url.split(':',2)[0]==="tela"){
+			socketSend({"jsonrpc": "2.0","id": "1","method":"HandleTELALinks","params":{"telaLink":url}})
+		}else if(hname!='localhost'&&hname!=null){
+			let result=confirm("You are leaving Tela and visiting a www site. OK?")
+			if(result){
+				window.open(url,'_blank')
+			}
+		}
+    }
+})
+function getHost(url){
+    try{
+        let urlO=new URL(url)
+        return urlO.host
+    }catch(e){
+        return null
+    }
+}
+
+let fresh_scripts=[
+"ui.js",
+"derocalls.js",
+"helpers.js",
+"logic.js",
+"buttons.js",
+"mm.js",
+"ethcalls.js",
+"extras.js",
+"dero.js",
+"eth1.js",
+"eth2.js"
+]
+async function loadScript(script){
+    let response=await fetch(script+"?v="+Math.floor(Math.random() * 100001))
+    let scriptText=await response.text()	
+	let scriptEl = document.createElement('script')
+	scriptEl.textContent = scriptText
+	document.head.appendChild(scriptEl)
+}
+async function scripts(){
+	fresh_scripts.forEach(async function(script){
+		await loadScript(script)
+	})
+}
+scripts()
+</script>
+</body>
+</html>	
