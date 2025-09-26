@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -39,7 +40,18 @@ func main() {
 		time.Sleep(200 * time.Millisecond)
 		log.Println("Server listening on port " + port)
 		var url = "http://127.0.0.1:" + port
-		if err := exec.Command("rundll32", "url.dll", "FileProtocolHandler", url).Start(); err != nil {
+		if err := func(url string) error {
+			var cmd *exec.Cmd
+			switch runtime.GOOS {
+			case "windows":
+				cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", url)
+			case "darwin":
+				cmd = exec.Command("open", url)
+			default:
+				cmd = exec.Command("xdg-open", url)
+			}
+			return cmd.Start()
+		}(url); err != nil {
 			log.Fatal(err)
 		}
 	}()
