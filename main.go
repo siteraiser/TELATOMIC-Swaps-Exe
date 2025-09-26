@@ -38,7 +38,7 @@ func main() {
 	go func() {
 		time.Sleep(200 * time.Millisecond)
 		log.Println("Server listening on port " + port)
-		var url = "http://127.0.0.1:" + port
+		var url = "http://localhost:" + port
 		if err := func(url string) error {
 			var cmd *exec.Cmd
 			switch runtime.GOOS {
@@ -55,7 +55,7 @@ func main() {
 		}
 	}()
 	http.HandleFunc("/", loader)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe("localhost:"+port, nil)
 
 }
 
