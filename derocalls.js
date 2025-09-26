@@ -367,7 +367,7 @@ async function contractIdExists(asset,htl_scid,offer_id){
 		let result = await confirmModal(response.error.message + " Try again?");
 		if(result){
 			darken_layer.classList.remove("hidden");
-			await contractIdExists(asset,htl_scid,offer_id);
+			return await contractIdExists(asset,htl_scid,offer_id);
 		}else{
 			return false;
 		}
