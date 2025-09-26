@@ -2,11 +2,13 @@ package main
 
 import (
 	"embed"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -28,15 +30,21 @@ import (
 var static embed.FS
 
 func main() {
+
+	portFlag := flag.Int("port", 8080, "string")
+	flag.Parse()
+	fmt.Println(*portFlag)
+	port := strconv.Itoa(*portFlag)
 	go func() {
 		time.Sleep(200 * time.Millisecond)
-		const url = "http://127.0.0.1:8080"
+		log.Println("Server listening on port " + port)
+		var url = "http://127.0.0.1:" + port
 		if err := exec.Command("rundll32", "url.dll", "FileProtocolHandler", url).Start(); err != nil {
 			log.Fatal(err)
 		}
 	}()
 	http.HandleFunc("/", loader)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+port, nil)
 
 }
 
