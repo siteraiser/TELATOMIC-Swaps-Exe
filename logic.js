@@ -384,6 +384,10 @@ async function displayBids(res){
 		
 		setStatus(action_button)
 		let etype="div"
+
+		let action_button_div=document.createElement(etype)			
+		action_button_div.appendChild(action_button)
+
 		let offer_shown=document.createElement(etype)
 		offer_shown.textContent=offer_text
 		let dero_bid_address=document.createElement(etype)
@@ -401,7 +405,7 @@ async function displayBids(res){
 		let row={
 			"id":offer.id,
 			"deadline":(offer.deadline == 0?10000000000:offer.deadline),
-			"action_button":action_button,
+			"action_button":action_button_div,
 			"offer_shown":offer_shown,
 			"dero_bid_address":dero_bid_address,
 			"pls_bid_address":pls_bid_address,

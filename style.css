@@ -5,6 +5,8 @@ margin: 0;
 background: #abf7dd;
 background: linear-gradient(0deg, rgba(171, 247, 221, 1) 0%, rgb(183, 214, 207) 50%, rgba(155, 218, 250, 1) 100%);
 }
+
+
 h1{font-family:Georgia,serif;margin:0px auto}
 #wg{
 text-align:center;
@@ -27,6 +29,13 @@ border-radius:5px;
 background:#d3ebed;
 }
 footer>div{padding: 15px;}
+
+
+
+
+
+
+
 #wallets{  
 max-width:fit-content;
 text-align:center;
@@ -42,13 +51,17 @@ overflow-x: hidden;
 text-overflow: ellipsis;
 text-wrap-mode: nowrap;
 font-size: .8em;
-margin: 3px 0;
+
 }
 
 .c_buttons_div{
 margin-left: 50px;
 top: -50px;
 position: relative;
+
+}
+.c_buttons_div button{
+margin: 3px 0;
 }
 .showChainId{color:#999;}
 #c_status{color:#ddd;display:inline-block;font-size:2.4em;margin:0px 4px}
@@ -66,8 +79,8 @@ flex-wrap: wrap;
 #bids>div{
 flex: 1;
 padding:10px;
-border:1px solid black;
-box-shadow:0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+border:1px solid #202776;
+box-shadow:0px 2px 4px 0px rgba(0, 61, 150, 0.6);
 border-radius:5px 5px 0px 0px;
 background: #d3ebed;
 }
@@ -117,12 +130,16 @@ outline: 1px solid blue;
 display: grid;
 grid-template-columns: repeat(8, 1fr);
 grid-auto-rows: 100px;
-gap:2px	
+gap:0px;
 }
-
+#bid_list button{
+	width: 100%;
+    height: 100%;
+}
 
 #bid_list>div>* {min-width:80px;}
 #bid_list>div>div{border: 1px solid #fff;background-color: #eee; }
+#bid_list>div>*{padding:2px;}
 #bid_list>div :nth-child(1){ grid-column: 1} 
 #bid_list>div :nth-child(2){ grid-column: 2} 
 #bid_list>div :nth-child(3){ grid-column: 3} 
@@ -133,7 +150,7 @@ gap:2px
 #bid_list>div :nth-child(8){ grid-column: 8} 
 #bid_list>div :nth-child(3), #bid_list>div :nth-child(4), #bid_list>div :nth-child(5), #bid_list>div :nth-child(6), #bid_list>div :nth-child(7), #bid_list>div :nth-child(8){word-wrap:break-word;word-break:break-all;overflow-y:auto}
 #bid_list :first-child :nth-child(3),#bid_list :first-child :nth-child(4),#bid_list :first-child :nth-child(5),#bid_list :first-child :nth-child(6){ word-wrap:normal;word-break:normal;overflow-y:initial;grid-row: 1 / 16;} 
-#bid_list div:nth-child(1),#bid_list div:nth-child(1) div {height:55px;margin-bottom: 2px}
+#bid_list div:nth-child(1)>div, #bid_list>div:first-child{height:55px;margin-bottom: 5px}
 
 .modal {
 background-color:#eee;
@@ -195,3 +212,59 @@ display:block
 
 #index_address,.messages{word-wrap:break-word;word-break:break-all}
 .messages{max-height:50px;overflow-y:auto}
+
+
+
+@media (prefers-color-scheme: dark) {
+	body {
+	background: black;
+	color: white;
+	}
+	footer{
+	  background:#10484d;
+	}
+
+	a{color:#5ee48e}
+	button{
+    background: #080808;
+    color: #5ee48e;
+	border: 2px outset #1a7e39;
+	}
+	button:hover {
+		box-shadow:0 1px 2px 0 rgba(0,200,0,0.8);
+		background:#222;
+	}
+	#bid_list{ background:#1a7e39;}
+	#bids > div{
+		 background:#142628;
+	}	
+	div#bid_list button:disabled{
+	color: #5f5f5f;
+	box-shadow:initial;
+	background:#000;
+	}	
+	#bid_list>div>div {
+		border: 1px solid #4d754f;
+		background-color: #000;
+	}
+
+	.bid_filter_buttons > button.selected
+	{
+	color: black;
+	background-color: #3eda33;
+	box-shadow: 0px 2px 2px rgb(145 189 159 / 60%)
+	}
+	input[type=checkbox]:checked + div {
+		background: #a8a8a826;
+		outline: 1px solid #037f00;
+	}
+	.modal {
+		background-color:#252525;
+		box-shadow: 4px 1px 11px 5px #072904;
+	}
+	input,.modal input,.modal textarea,.modal select{
+		background: black;
+		color: #56ff04;
+	}
+
+}
