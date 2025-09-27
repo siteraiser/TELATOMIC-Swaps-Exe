@@ -352,7 +352,7 @@ async function contractIdExists(asset,htl_scid,offer_id){
 	JSONR.params.scid = "";
 	JSONR.params.code = false;
 	JSONR.params.keysstring = [scidfield];
-	JSONR.params.scid = dero_htl_scid;
+	JSONR.params.scid = bids_sc_id;
 	let response = await socketSend(JSONR);
 	
 	if(response.result){
@@ -360,9 +360,9 @@ async function contractIdExists(asset,htl_scid,offer_id){
 		if(!scid.includes("NOT AVAILABLE")){
 			if(htl_scid == hexToUtf8(scid)){
 				return true;
-			}
-			return false;
+			}			
 		}
+		return false;
 	}else if(response.error){
 		let result = await confirmModal(response.error.message + " Try again?");
 		if(result){
