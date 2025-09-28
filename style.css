@@ -216,6 +216,7 @@ display:block
 
 
 @media (prefers-color-scheme: dark) {
+	:root{color-scheme:dark}
 	body {
 	background: black;
 	color: white;
@@ -263,7 +264,6 @@ display:block
 		box-shadow: 4px 1px 11px 5px #072904;
 	}
 	input,.modal input,.modal textarea,.modal select{
-		background: black;
 		color: #56ff04;
 	}
 
