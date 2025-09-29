@@ -33,10 +33,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 		await deployer.send({
   			from: connected_evm_account
 		}, function(error, transactionHash){})
-		.on('error', function(error){
-			messages.innerHTML = error.message;
-			alertModal(error.message)
-			return false;})
+		.on('error', function(error){messages.innerHTML = error.message})
 		.on('transactionHash', function(transactionHash){tx_hash=transactionHash})
 		.on('receipt', function(receipt){})
 		.on('confirmation', function(confirmationNumber, receipt){confirmed=true})
