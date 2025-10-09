@@ -50,7 +50,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 			return tx_hash;
 		}
 		if(error_message != ''){
-			alertModal(error_message)
+			alertModal("Reject any pending transactions in the wallet and try to install again. Error: "+error_message)
 		}
 		return false;
 

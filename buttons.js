@@ -267,7 +267,7 @@ async function getMakerDPInstallButton(action_button,offer,deadline,hashvalue){
 	}
 	action_button.addEventListener("click",async function() {
 		action_button.disabled = true;
-		let result = await confirmModal("<b>IMPORTANT:</b> "+timeleft+" hours left to safely install and lock your deposit of "+convertToDeroUnits(offer.plsamt)+"Dero. If the other party waits until the last minute to cash out, you will have "+timeleftfordeadline+" hours to claim your PLS before you risk losing the funds. They can claim a refund after their 48 hour lockup for you is up. Ensure you can be available to complete your withdrawal when it is ready!<br> Start 1 day Dero contract and fund it with "+ convertToDeroUnits(offer.deroamt) +" for Dero address: "+ offer.accepted_dero_address +" using hash value: "+hashvalue+". Are you sure you want to continue?");//
+		let result = await confirmModal("<b>IMPORTANT:</b> "+timeleft+" hours left to safely install and lock your deposit of "+convertToDeroUnits(offer.deroamt)+"Dero. If the other party waits until the last minute to cash out, you will have "+timeleftfordeadline+" hours to claim your PLS before you risk losing the funds. They can claim a refund after their 48 hour lockup for you is up. Ensure you can be available to complete your withdrawal when it is ready!<br> Start 1 day Dero contract and fund it with "+ convertToDeroUnits(offer.deroamt) +" for Dero address: "+ offer.accepted_dero_address +" using hash value: "+hashvalue+". Are you sure you want to continue?");//
 		if (result) {
 			await alertModal("Installing Dero stage 2 contract with one day lock period");
 			darken_layer.classList.remove("hidden");
