@@ -21,6 +21,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 	
 	if (result) {
 		darken_layer.classList.remove("hidden");
+		let error_message = "";
 		let tx_hash ="";
 		let confirmed =false;
 		//create contract deployer
@@ -33,24 +34,29 @@ async function installPLSHTL(days,pls_receiver_address) {
 		await deployer.send({
   			from: connected_evm_account
 		}, function(error, transactionHash){})
-		.on('error', function(error){messages.innerHTML = error.message})
+		.on('error', function(error){
+			error_message = error.message;
+			messages.innerHTML = error.message;
+		})
 		.on('transactionHash', function(transactionHash){tx_hash=transactionHash})
 		.on('receipt', function(receipt){})
 		.on('confirmation', function(confirmationNumber, receipt){confirmed=true})
 		.then(tx => {})
 		.catch(error => {
-			alertModal(error.message)
-			return false;
+			error_message = error.message;
+			messages.innerHTML = error_message;
 		});
 		if(tx_hash != "" && confirmed){
 			return tx_hash;
+		}
+		if(error_message != ''){
+			alertModal(error_message)
 		}
 		return false;
 
 	}
 	return false;
 }	
-
 
 
 //Fund htl scid. Used for both stages.
