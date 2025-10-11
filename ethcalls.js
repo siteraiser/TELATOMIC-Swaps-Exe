@@ -21,7 +21,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 	
 	if (result) {
 		darken_layer.classList.remove("hidden");
-		let error_message = "";
+		let err=null;
 		let tx_hash ="";
 		let confirmed =false;
 		//create contract deployer
@@ -35,22 +35,26 @@ async function installPLSHTL(days,pls_receiver_address) {
   			from: connected_evm_account
 		}, function(error, transactionHash){})
 		.on('error', function(error){
-			error_message = error.message;
-			messages.innerHTML = error.message;
+			err = error;
+			messages.innerHTML = err.message;
 		})
 		.on('transactionHash', function(transactionHash){tx_hash=transactionHash})
 		.on('receipt', function(receipt){})
 		.on('confirmation', function(confirmationNumber, receipt){confirmed=true})
 		.then(tx => {})
 		.catch(error => {
-			error_message = error.message;
-			messages.innerHTML = error_message;
+			err = error; 
+			messages.innerHTML = err.message;
 		});
 		if(tx_hash != "" && confirmed){
 			return tx_hash;
 		}
-		if(error_message != ''){
-			alertModal("Reject any pending transactions in the wallet and try to install again. Error: "+error_message)
+		if(err !== null){
+			let err_message = "Cancel any pending transactions in the wallet and try to install again. Error: ";
+			if(err.data.location == 'confirmation'){
+				err_message = "";
+			}
+			alertModal(err_message+err.message)
 		}
 		return false;
 
