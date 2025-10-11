@@ -50,7 +50,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 			return tx_hash;
 		}
 		if(err !== null){
-			let err_message = "Cancel any pending transactions in the wallet and try to install again. Error: ";
+			let err_message = "Cancel any pending transactions in the wallet and try to install again. ";
 			if(err.data.location == 'confirmation'){
 				err_message = "";
 			}
@@ -60,8 +60,7 @@ async function installPLSHTL(days,pls_receiver_address) {
 
 	}
 	return false;
-}	
-
+}
 
 //Fund htl scid. Used for both stages.
 async function fundPLSHTL(id,pls_htl_scid,pls_amt,hash){
