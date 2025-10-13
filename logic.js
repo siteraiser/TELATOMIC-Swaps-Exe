@@ -86,6 +86,7 @@ async function displayBids(res){
 		filterOffers(offer,offers)
 	}	
 	sortOffers(offers)
+	limitOffers(offers)
 	
 	for (let i in offers) {
 		let offer=offers[i]

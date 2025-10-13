@@ -272,6 +272,11 @@ function deSelect(id){
 }
 
 
+//-- limit
+document.getElementById("limit").addEventListener("change", async function() {
+	await refreshBids();
+});
+
 //--------------------------
 //--Bidding functions-------
 //--------------------------	

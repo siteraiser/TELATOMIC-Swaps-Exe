@@ -240,3 +240,10 @@ function sortOffers(offers){
 
 }	
 
+function limitOffers(offers){
+	let l = parseInt(document.querySelector('#limit').value)
+	if(l === -1){
+		return ;
+	}
+	return offers.splice(l)
+}
